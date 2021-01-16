@@ -1,8 +1,10 @@
 from flask import Blueprint, redirect, url_for, render_template, request, jsonify
 from flask_login import login_required, current_user
 from logic import pull_results
+from .models import Profiles
 from . import db, page_not_found
 import os
+import json
 
 main = Blueprint("main", __name__)
 
@@ -76,9 +78,127 @@ def team():
     return render_template("team.html", page_name="Meet the Team")
 
 
-@main.route("/profile/<name>/", methods=["GET"])
-def profile(name="index"):
-    return render_template(f"{name}.html", page_name=f"{name.upper()}")
+@main.route("/profile/<fname>_<lname>", methods=["GET"])
+def profile(fname="index", lname="index"):
+    data = Profiles.query.all()
+
+    profile_data = None
+    for person in data:
+        if (
+            person.fname.upper() == fname.upper()
+            and person.lname.upper() == lname.upper()
+        ):
+            profile_data = person
+            break
+
+    if profile_data != None:
+        service_json = json.loads(profile_data.services)
+        service_temp = service_json.keys()
+        service_keys = [x for x in service_temp]
+
+        education_json = json.loads(profile_data.education)
+        education_temp = education_json.keys()
+        education_keys = [x for x in education_temp]
+
+        experience_json = json.loads(profile_data.experience)
+        experience_temp = experience_json.keys()
+        experience_keys = [x for x in experience_temp]
+
+        return render_template(
+            "profile.html",
+            page_name=f"{fname.upper()}",
+            description=profile_data.description,
+            name=f"{profile_data.fname} {profile_data.lname}",
+            age=profile_data.age,
+            year_exp=profile_data.year_exp,
+            country=profile_data.country,
+            location=profile_data.location,
+            email=profile_data.email,
+            service_keys=service_keys,
+            service_data=service_json,
+            education_keys=education_keys,
+            education_data=education_json,
+            experience_keys=experience_keys,
+            experience_data=experience_json,
+            image=f"{fname.lower()}_{lname.lower()}",
+        )
+    else:
+        return render_template("404.html", page_name="ERROR 404")
+
+
+@main.route("/test_db/")
+def test_database():
+    fname = "Hubert"
+    lname = "Swic"
+    age = 23
+    description = "I am a Business Management Graduate. Currently working as a Python DevOps Trainee. Aspiring Programmer with 6 years of non-professional experience in multiple languages, such as Python, Lua, C++, JSON, and JavaScript to name a few. Working on open-source projects to further my understanding and learning to apply it in the workplace."
+    year_exp = 5
+    country = "UK"
+    location = "London"
+    email = "hswic@spartaglobal.com"
+    services = json.dumps(
+        {
+            "Python": "An interpreted, high-level and general-purpose programming language.",
+            "Flask": "A micro web framework written in Python. Used for back-end web applications.",
+            "HashiCorp": "Knowledge of tools such as Terraform, Packer, Vagrant.",
+            "Docker": "A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.",
+        }
+    )
+    education = json.dumps(
+        {
+            "University of Kent": [
+                "2016 - 2020",
+                "Studied Business Management with a year placement. Main modules consisted of Leadership, Management and Operations. Completed a CMI Level 5 Certification.",
+            ],
+            "St John Bosco College": [
+                "2013 - 2016",
+                "Sixth Form. Studied ICT, Busines, Media, achieved A*-B. Achieved many rewards in all the subjects studied.",
+            ],
+        }
+    )
+    experience = json.dumps(
+        {
+            "Python DevOps Trainee - Sparta Global": [
+                "Oct 2020 - Present",
+                "Currently training towards the consultant role. Studied core Business, Python, Linux, SQL, and Automated Deployment subjects.",
+            ],
+            "Sales Representative - House of Vapes": [
+                "Sep 2018 - Aug 2019",
+                "Helped customers through product choice process. Responsible for restocking the store. Worked in a small team. Provided technical knowledge about products and devices.",
+            ],
+            "Data Administrator - Computappoint": [
+                "Aug 2017 - Sep 2017",
+                "Dealt with customers over the phone, as well as email and updated the database with current and updated CV. Improved my communication skills and market knowledge, as well as team working skills as I worked as part of the recruitment team.",
+            ],
+        }
+    )
+
+    db_check = Profiles.query.all()
+
+    exists = False
+    for user in db_check:
+        if user.fname == fname and user.lname == lname:
+            exists = True
+
+    if not exists:
+        data = Profiles(
+            fname=fname,
+            lname=lname,
+            age=age,
+            description=description,
+            year_exp=year_exp,
+            country=country,
+            location=location,
+            email=email,
+            services=services,
+            education=education,
+            experience=experience,
+        )
+        db.session.add(data)
+        db.session.commit()
+
+    else:
+        print("Already Exists")
 
 
 @main.route("/panel/", methods=["GET", "POST"])
