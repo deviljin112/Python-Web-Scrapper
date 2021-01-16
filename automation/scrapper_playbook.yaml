@@ -1,0 +1,114 @@
+---
+- name: Running the Python Scrapper
+  hosts: scrapper
+  gather_facts: yes
+  remote_user: ubuntu
+  become: true
+
+  vars:
+    code_local: "deploy_code"
+    code_dest: "scrapper"
+    config_local: "config_files"
+    config_dest: "config_files"
+    home_location: "/home/ubuntu"
+
+  tasks:
+    - name: Synchronizing App Files
+      synchronize:
+        src: "{{ home_location }}/{{ code_local }}/"
+        dest: "{{ home_location }}/{{ code_dest }}/"
+    - name: Synchronizing Config Files
+      synchronize:
+        src: "{{ home_location }}/{{ config_local }}/"
+        dest: "{{ home_location }}/{{ config_dest }}/"
+    - name: Running Updates & Upgrades
+      apt:
+        upgrade: "yes"
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+      become: true
+    - name: Getting Public IP
+      command: "curl ifconfig.me"
+      register: host_ip
+    - name: Ensuring software-properties-common is installed
+      apt:
+        name: software-properties-common
+        state: present
+    - name: Ensuring nginx is installed
+      apt:
+        name: nginx
+        state: present
+    - name: Ensuring nginx is started
+      service:
+        name: nginx
+        state: started
+    - name: Copying config file for nginx
+      copy:
+        src: "{{ home_location}}/{{ config_dest }}/nginx.conf"
+        dest: /etc/nginx/
+        remote_src: yes
+    - name: Ensuring public IP is current
+      lineinfile:
+        path: /etc/nginx/nginx.conf
+        regexp: "^(.*)server_name(.*)$"
+        line: "server_name {{ host_ip.stdout }};"
+        backrefs: yes
+    - name: Restarting nginx to load new config file
+      service:
+        name: nginx
+        state: restarted
+    - name: Installing SQLITE3
+      apt:
+        name: sqlite3
+        state: present
+    - name: Installing python3 and pip
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+    - name: Installing scrapper requirements
+      command:
+        cmd: python3 -m pip install -r requirements.txt
+        chdir: "{{ home_location }}/{{ code_dest }}/"
+    - name: Building Dependancy Wheel
+      command:
+        cmd: python3 setup.py bdist_wheel
+        chdir: "{{ home_location }}/{{ code_dest }}/"
+    - name: Installing Wheel Dependencies
+      command:
+        cmd: python3 -m pip install itjobswatch_data-0.1-py3-none-any.whl
+        chdir: "{{ home_location }}/{{ code_dest }}/dist"
+    - name: Building scrapper dependencies
+      command:
+        cmd: python3 setup.py build
+        chdir: "{{ home_location }}/{{ code_dest }}/"
+    - name: Installing scrapper dependencies
+      command:
+        cmd: python3 setup.py install
+        chdir: "{{ home_location }}/{{ code_dest }}/"
+    - name: Installing Supervisor
+      apt:
+        name: supervisor
+        state: present
+    - name: Ensuring Supervisor is started
+      service:
+        name: supervisor
+        state: started
+    - name: Copying config file for supervisor
+      copy:
+        src: "{{ home_location }}/{{ config_dest }}/flask_app.conf"
+        dest: /etc/supervisor/conf.d/
+        remote_src: yes
+    - name: Running supervisor commands
+      command:
+        cmd: "{{ item }}"
+      with_items:
+        - supervisorctl reread
+        - supervisorctl update
+        - supervisorctl avail
+        - supervisorctl restart FlaskApp
+      become: true
+      environment:
+        FLASK_APP: project

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/simple-line-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <title>Python Scrapper</title>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-md-center justify-content-start">
+            <a class="navbar-brand d-md-none d-inline" href="{{ url_for('main.home') }}">Home</a>
+            <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="nav-link" href="#"><i class="fab fa-jenkins"></i></a>
+            <div class="navbar-collapse collapse justify-content-between align-items-center w-100"
+                id="collapsingNavbar2">
+                <ul class="navbar-nav mx-auto text-md-center text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/deviljin112/">Repository</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.team') }}">Team</a>
+                    </li>
+                    <li class="nav-item my-auto">
+                        <a class="nav-link navbar-brand mx-0 d-none d-md-inline"
+                            href="{{ url_for('main.home') }}">Home</a>
+                    </li>
+                    {% if not current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                    </li>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.panel') }}">Panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+                    <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/hubert-swic/"><i
+                                class="fab fa-linkedin"></i></a> </li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/deviljin112"><i
+                                class="fab fa-github"></i></a> </li>
+                </ul>
+            </div>
+        </nav>
+
+        <center>
+            <h1>{{ page_name }}</h1>
+        </center>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small unique-color-dark fixed-bottom">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Made By:
+            <a href="https://github.com/deviljin112"> Deviljin112 (Hubert)</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<!-- About Section Start -->
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="img-thumb">
+                    <img class="img-fluid" src="{{ url_for('static', filename='img/sample.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="profile-wrapper">
+                    <h3>Hi Guys!</h3>
+                    <p>
+                        I am a Business Management Graduate. Currently working as a Python DevOps Trainee. Aspiring
+                        Programmer with 6 years of non-professional experience in multiple languages, such as Python,
+                        Lua, C++, JSON, and JavaScript to name a few. Working on open-source projects to further my
+                        understanding and learning to apply it in the workplace.
+                    </p>
+                    <div class="about-profile">
+                        <ul class="admin-profile">
+                            <li><span class="pro-title"> Name </span> <span class="pro-detail">Hubert Swic</span></li>
+                            <li><span class="pro-title"> Age </span> <span class="pro-detail">23</span></li>
+                            <li><span class="pro-title"> Experience </span> <span class="pro-detail">6 Years</span></li>
+                            <li><span class="pro-title"> Country </span> <span class="pro-detail">UK</span></li>
+                            <li><span class="pro-title"> Location </span> <span class="pro-detail">London</span></li>
+                            <li><span class="pro-title"> E-mail </span> <span
+                                    class="pro-detail">hswic@spartaglobal.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Section End -->
+
+<!-- Services Section Start -->
+<section id="services" class="services section-padding">
+    <h2 class="section-title">What I do</h2>
+    <div class="container">
+        <div class="row">
+            <!-- Services item -->
+            <div class="col-md-6 col-lg-3 col-xs-12">
+                <div class="services-item">
+                    <div class="icon">
+                        <i class="icon-heart"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a>Python</a></h3>
+                        <p>An interpreted, high-level and general-purpose programming language.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Services item -->
+            <div class="col-md-6 col-lg-3 col-xs-12">
+                <div class="services-item">
+                    <div class="icon">
+                        <i class="icon-link"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a>Flask</a></h3>
+                        <p>A micro web framework written in Python. Used for back-end web applications.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Services item -->
+            <div class="col-md-6 col-lg-3 col-xs-12">
+                <div class="services-item">
+                    <div class="icon">
+                        <i class="icon-globe"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a>HashiCorp</a></h3>
+                        <p>Tools used: Terraform, Packer, Vagrant.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Services item -->
+            <div class="col-md-6 col-lg-3 col-xs-12">
+                <div class="services-item">
+                    <div class="icon">
+                        <i class="icon-layers"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a>Docker</a></h3>
+                        <p>A set of platform as a service products that use OS-level virtualization to deliver software
+                            in packages called containers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+<!-- Resume Section Start -->
+<div id="resume" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="education">
+                    <ul class="timeline">
+                        <li>
+                            <i class="icon-graduation"></i>
+                            <h2 class="timelin-title">Education</h2>
+                        </li>
+                        <li>
+                            <div class="content-text">
+                                <h3 class="line-title">University of Kent</h3>
+                                <span>2016 - 2020</span>
+                                <p class="line-text">Studied Business Management with a year placement.
+                                    Main modules consisted of Leadership, Management and Operations.
+                                    Completed a CMI Level 5 Certification.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="content-text">
+                                <h3 class="line-title">St John Bosco College</h3>
+                                <span>2013 - 2016</span>
+                                <p class="line-text">Sixth Form. Studied ICT, Busines, Media, achieved A*-B.
+                                    Achieved many rewards in all the subjects studied.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="experience">
+                    <ul class="timeline">
+                        <li>
+                            <i class="icon-briefcase"></i>
+                            <h2 class="timelin-title">Experience</h2>
+                        </li>
+                        <li>
+                            <div class="content-text">
+                                <h3 class="line-title">Python DevOps Trainee - Sparta Global</h3>
+                                <span>Oct 2020 - Present</span>
+                                <p class="line-text">Currently training towards the consultant role.
+                                    Studied core Business, Python, Linux, SQL, and Automated Deployment subjects.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="content-text">
+                                <h3 class="line-title">Sales Representative - House of Vapes</h3>
+                                <span>Sep 2018 - Aug 2019</span>
+                                <p class="line-text">Helped customers through product choice process.
+                                    Responsible for restocking the store. Worked in a small team.
+                                    Provided technical knowledge about products and devices.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="content-text">
+                                <h3 class="line-title">Data Administrator - Computappoint</h3>
+                                <span>Aug 2017 - Sep 2017</span>
+                                <p class="line-text">Dealt with customers over the phone, as well as email and updated
+                                    the database with current and updated CV.
+                                    Improved my communication skills and market knowledge, as well as team working
+                                    skills as I worked as part of the recruitment team.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Resume Section End -->
+
+{% endblock %}

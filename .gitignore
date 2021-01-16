@@ -1,0 +1,5 @@
+Web_Scrapper.egg-info/
+venv/
+build/
+dist/
+__pycache__/

@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<style>
+    table,
+    th,
+    td {
+        padding-top: 50px;
+        border: 0px solid white;
+        width: 50%;
+        font-family: 'Quicksand', sans-serif;
+        color: white;
+    }
+
+    .card-wrapper {
+        margin-right: auto;
+        margin-left: auto;
+
+        max-width: 75%;
+    }
+
+    .card-section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .fa-github:hover {
+        color: black;
+    }
+
+    .fa-linkedin:hover {
+        color: dodgerblue;
+    }
+
+    .more_info {
+        color: red;
+    }
+
+    a {
+        color: inherit;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+
+<center>
+    <div class="card-wrapper">
+
+        <!-- FIRST ROW -->
+
+        <div class="card-section">
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Hubert Swic</h5>
+                        <p class="card-text">
+                            Back-end Developer.</br>
+                            Specialises in Python, JavaScript and Lua.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECOND ROW -->
+
+        <div class="card-section">
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THIRD ROW -->
+
+        <div class="card-section">
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="/static/img/sample.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content.</br>
+                            <a class="more_info" href="{{ url_for('main.profile', name='hubert') }}"> More Info.</a>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a href="https://www.linkedin.com/in/hubert-swic/">
+                                <i class=" fab fa-linkedin" style="font-size:40px"></i>
+                            </a>
+                            <a href="https://github.com/deviljin112">
+                                <i class="fab fa-github" style="font-size:40px"></i>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</center>
+{% endblock %}
