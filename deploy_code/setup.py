@@ -13,5 +13,6 @@ setup(
         "flask",
         "flask-login",
         "flask-sqlalchemy",
+        "flask-wtf",
     ],
 )
