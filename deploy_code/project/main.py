@@ -1,5 +1,7 @@
 from flask import Blueprint, redirect, url_for, render_template, request, jsonify
 from flask_login import login_required, current_user
+from flask_wtf import FlaskForm
+from wtforms import TextField
 from logic import pull_results
 from .models import Profiles
 from . import db, page_not_found
@@ -124,6 +126,115 @@ def profile(fname="index", lname="index"):
         )
     else:
         return render_template("404.html", page_name="ERROR 404")
+
+
+class DBForm(FlaskForm):
+    first_name = TextField("First Name")
+    last_name = TextField("Last Name")
+    age = TextField("Age")
+    description = TextField("Profile Description")
+    year_exp = TextField("Year's of experience")
+    country = TextField("Country (code)")
+    location = TextField("Location (city)")
+    email = TextField("Email Address")
+    services_one = TextField("Services Box Title 1")
+    services_one_desc = TextField("Services Box Description 1")
+    services_two = TextField("Services Box Title 2")
+    services_two_desc = TextField("Services Box Description 2")
+    services_three = TextField("Services Box Title 3")
+    services_three_desc = TextField("Services Box Description 3")
+    services_four = TextField("Services Box Title 4")
+    services_four_desc = TextField("Services Box Description 4")
+    education = TextField("Education (Specific JSON Format!!!)")
+    experience = TextField("Experience (Specific JSON Format!!!)")
+
+
+@main.route("/db_form", methods=["GET", "POST"])
+def db_form():
+    error = ""
+    form = DBForm(request.form)
+
+    if request.method == "POST":
+        fname = form.first_name.data
+        lname = form.last_name.data
+        age = form.age.data
+        description = form.description.data
+        year_exp = form.year_exp.data
+        country = form.country.data
+        location = form.location.data
+        email = form.email.data
+        services_one = form.services_one.data
+        services_one_desc = form.services_one_desc.data
+        services_two = form.services_two.data
+        services_two_desc = form.services_two_desc.data
+        services_three = form.services_three.data
+        services_three_desc = form.services_three_desc.data
+        services_four = form.services_four.data
+        services_four_desc = form.services_four_desc.data
+        education = form.education.data
+        experience = form.experience.data
+
+        if (
+            fname
+            and lname
+            and age
+            and description
+            and year_exp
+            and country
+            and location
+            and email
+            and services_one
+            and services_two
+            and services_three
+            and services_four
+            and education
+            and experience
+        ):
+            db_check = Profiles.query.all()
+
+            exists = False
+            for user in db_check:
+                if user.fname == fname and user.lname == lname:
+                    exists = True
+
+            if not exists:
+                services = json.dumps(
+                    {
+                        services_one: services_one_desc,
+                        services_two: services_two_desc,
+                        services_three: services_three_desc,
+                        services_four: services_four_desc,
+                    }
+                )
+
+                data = Profiles(
+                    fname=fname,
+                    lname=lname,
+                    age=age,
+                    description=description,
+                    year_exp=year_exp,
+                    country=country,
+                    location=location,
+                    email=email,
+                    services=services,
+                    education=education,
+                    experience=experience,
+                )
+                db.session.add(data)
+                db.session.commit()
+
+            else:
+                print("Already Exists")
+        else:
+            error = "Please fill in all the details!!"
+
+    return render_template(
+        "form.html",
+        page_name="Profile Builder",
+        msg=error,
+        form=form,
+        announce="Please use 'http://www.objgen.com/json' to generate JSON format.",
+    )
 
 
 @main.route("/test_db/")

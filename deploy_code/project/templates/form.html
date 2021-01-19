@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    p {
+        color: white;
+    }
+
+    h3 {
+        color: red;
+    }
+
+    h4 {
+        color: limegreen;
+    }
+</style>
+
+{% if msg %}
+<h3>ERROR: {{ msg }}</h3>
+{% endif %}
+
+<h4>{{ announce }}</h4>
+
+<form method="POST">
+    {{ form.csrf_token }}
+    <p>
+        {{ form.first_name.label }}{{ form.first_name(size=20 )}}
+    </p>
+    <p>
+        {{ form.last_name.label }}{{ form.last_name(size=20) }}
+    </p>
+    <p>
+        {{ form.age.label }}{{ form.age(size=3) }}
+    </p>
+    <p>
+        {{ form.description.label }}{{ form.description(size=255) }}
+    </p>
+    <p>
+        {{ form.year_exp.label }}{{ form.year_exp(size=2) }}
+    </p>
+    <p>
+        {{ form.country.label }}{{ form.country(size=3) }}
+    </p>
+    <p>
+        {{ form.location.label }}{{ form.location(size=100) }}
+    </p>
+    <p>
+        {{ form.email.label }}{{ form.email(size=255) }}
+    </p>
+    <p>
+        {{ form.services_one.label }}{{ form.services_one(size=30) }}
+    </p>
+    <p>
+        {{ form.services_one_desc.label }}{{ form.services_one_desc(size=500) }}
+    </p>
+    <p>
+        {{ form.services_two.label }}{{ form.services_two(size=30) }}
+    </p>
+    <p>
+        {{ form.services_two_desc.label }}{{ form.services_two_desc(size=500) }}
+    </p>
+    <p>
+        {{ form.services_three.label }}{{ form.services_three(size=30) }}
+    </p>
+    <p>
+        {{ form.services_three_desc.label }}{{ form.services_three_desc(size=500) }}
+    </p>
+    <p>
+        {{ form.services_four.label }}{{ form.services_four(size=30) }}
+    </p>
+    <p>
+        {{ form.services_four_desc.label }}{{ form.services_four_desc(size=500) }}
+    </p>
+    <p>
+        {{ form.education.label }}{{ form.education(size=10000) }}
+    </p>
+    <p>
+        {{ form.experience.label }}{{ form.experience(size=10000 )}}
+    </p>
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
