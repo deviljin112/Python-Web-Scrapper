@@ -23,6 +23,7 @@
 <h4>{{ announce }}</h4>
 
 <form method="POST">
+
     {{ form.csrf_token }}
     <p>
         {{ form.first_name.label }}{{ form.first_name(size=20 )}}
@@ -80,6 +81,7 @@
     </p>
 
     <input type="submit" value="Submit">
+
 </form>
 
 {% endblock %}
