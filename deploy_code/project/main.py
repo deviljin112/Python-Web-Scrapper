@@ -128,6 +128,7 @@ def profile(fname="index", lname="index"):
         return render_template("404.html", page_name="ERROR 404")
 
 
+# The only OOP Class To exist in my code :(
 class DBForm(FlaskForm):
     first_name = TextField("First Name")
     last_name = TextField("Last Name")
