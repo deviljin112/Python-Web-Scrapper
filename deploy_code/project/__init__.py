@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_frozen import Freezer
 
 db = SQLAlchemy()
+frost = Freezer(with_no_argument_rules=False, log_url_for=False)
 
 
 def page_not_found(e):
@@ -20,6 +22,7 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
+    frost.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
@@ -43,3 +46,4 @@ def create_app():
 
 
 app = create_app()
+## frost.freeze()

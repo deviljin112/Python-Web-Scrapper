@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import TextField
 from logic import pull_results
 from .models import Profiles
-from . import db, page_not_found
+from . import db, page_not_found, frost
 import os
 import json
 
@@ -80,7 +80,17 @@ def team():
     return render_template("team.html", page_name="Meet the Team")
 
 
-@main.route("/profile/<fname>_<lname>", methods=["GET"])
+@frost.register_generator
+def profile_gen():
+    names = [
+        ["hubert", "swic"],
+    ]
+
+    for name in names:
+        yield "main.profile", {"fname": name[0], "lname": name[1]}
+
+
+@main.route("/profile/<fname>_<lname>.html", methods=["GET"])
 def profile(fname="index", lname="index"):
     data = Profiles.query.all()
 
