@@ -14,5 +14,6 @@ setup(
         "flask-login",
         "flask-sqlalchemy",
         "flask-wtf",
+	"frozen-flask",
     ],
 )

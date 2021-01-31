@@ -90,7 +90,7 @@ def profile_gen():
         yield "main.profile", {"fname": name[0], "lname": name[1]}
 
 
-@main.route("/profile/<fname>_<lname>.html", methods=["GET"])
+@main.route("/profile/<fname>_<lname>", methods=["GET"])
 def profile(fname="index", lname="index"):
     data = Profiles.query.all()
 
