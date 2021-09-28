@@ -5,7 +5,6 @@ from wtforms import TextField
 from logic import pull_results
 from .models import Profiles
 from . import db, page_not_found, frost
-import os
 import json
 
 main = Blueprint("main", __name__)

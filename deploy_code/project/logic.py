@@ -1,56 +1,18 @@
-from bs4 import BeautifulSoup
-import bs4
 import requests
-
-
-def headers(results):
-    headers_list = []
-    header = results.find("tr", class_="resultsHeader")
-    for row in header:
-        title = row.find("div")
-        if isinstance(title, int) or title == None:
-            continue
-        else:
-            headers_list.append(title.get_text(separator=" "))
-
-    sub_header = results.find("th", class_="findJobsHdr")
-    headers_list.append(sub_header.text)
-    return headers_list
-
-
-def body(results):
-    body_list = []
-
-    for section in results:
-        section_list = []
-        if type(section) is bs4.element.NavigableString:
-            continue
-        else:
-            data = section.find_all("td")
-            for row in data:
-                if isinstance(row, int) or row == None:
-                    continue
-                else:
-                    if row.text == "" or row.text == "\xa0":
-                        continue
-                    else:
-                        section_list.append(row.text)
-
-        if len(section_list) > 0:
-            body_list.append(section_list)
-
-    return body_list
+import pandas as pd
 
 
 def pull_results():
     URL = "https://www.itjobswatch.co.uk/"
     page = requests.get(URL)
 
-    soup = BeautifulSoup(page.content, "html.parser")
-    output = soup.find("table", {"class": "results"})
+    df_list = pd.read_html(page.text)
+    for df in df_list:
+        if len(df) > 10:
+            data = df
 
-    title_headers = headers(output)
-    body_content = body(output)
+    title_headers = data.columns
+    body_content = data.to_numpy()
 
     json_dict = []
 
